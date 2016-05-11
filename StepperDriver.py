@@ -11,9 +11,9 @@ class StepperDriver:
 		
 		for i in range(0, steps):
 			gpio.output(self.stepPin, 1)
-			time.sleep(0.002) #500 Micro
+			time.sleep(0.005) 
 			gpio.output(self.stepPin, 0)
-			time.sleep(0.004) #1000 Micro
+			time.sleep(0.005) 
 		
 		self.startSleep()
 	
