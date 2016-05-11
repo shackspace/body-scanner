@@ -46,8 +46,8 @@ class StepperDriver:
 	def startSleep(self): gpio.output(self.sleepPin, 0)
 	def endSleep(self): gpio.output(self.sleepPin, 1)
 	
-	def setDirectionUp(self): gpio.output(self.dirPin, 1)
-	def setDirectionDown(self): gpio.output(self.dirPin, 0)
+	def setDirectionUp(self): gpio.output(self.dirPin, 0)
+	def setDirectionDown(self): gpio.output(self.dirPin, 1)
 	
 		
 	def __init__(self):
