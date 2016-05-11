@@ -24,10 +24,15 @@ class StepperDriver:
 		debounce = 0
 
 		for i in range(0, self.height):
-			if gpio.input(self.sensorPin) == 0: debounce += 1
+			print(i)
+			if gpio.input(self.sensorPin) == 0: 
+				debounce += 1
+				print("In Laser")
 			else: debounce = 0
+				print("Debounced")
 			
 			if debounce > 5:
+				print("Triggered")
 				self.goUp() #Move the sledge out of the sensor
 				self.startSleep()
 				break
@@ -53,7 +58,7 @@ class StepperDriver:
 	def __init__(self):
 		gpio.init()
 		
-		self.sensorPin = port.PA14 #Port for the light barrier on the column bottom
+		self.sensorPin = port.PA8 #Port for the light barrier on the column bottom
 		self.sleepPin = port.PA9 #Sleep Pin of the Polulu
 		self.stepPin = port.PA10 #Step Pin of the Polulu
 		self.dirPin = port.PA20 #Direction Pin of the Polulu
