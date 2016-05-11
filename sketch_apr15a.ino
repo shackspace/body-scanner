@@ -121,7 +121,7 @@ void go_bottom(void)
       if(!(digitalRead(lsPin)))
         debounce++;
       else
-         debounce = 0;
+         debounce = 0;is, der bei 449 Euro liegt, d
       
       if (debounce >= 5) {
         debounce = 0;
