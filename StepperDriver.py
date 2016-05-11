@@ -28,7 +28,8 @@ class StepperDriver:
 			if gpio.input(self.sensorPin) == 0: 
 				debounce += 1
 				print("In Laser")
-			else: debounce = 0
+			else: 
+				debounce = 0
 				print("Debounced")
 			
 			if debounce > 5:
