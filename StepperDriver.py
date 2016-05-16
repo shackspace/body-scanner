@@ -4,17 +4,18 @@ from pyA20.gpio import gpio
 from pyA20.gpio import port
 
 class StepperDriver:
-
 	def doStep(self, steps=200):
-	self.endSleep()
+		self.endSleep()
 	
-	for i in range(0, steps):
-		gpio.output(self.stepPin, 1)
-		time.sleep(0.001) 
-		gpio.output(self.stepPin, 0)
-		time.sleep(0.001) 
+		for i in range(0, steps):
+			gpio.output(self.stepPin, 1)
+			time.sleep(0.001) 
+			gpio.output(self.stepPin, 0)
+			time.sleep(0.001) 
 	
-	self.startSleep()
+		self.startSleep()
+	
+	def doStop(): self.stopped = True
 	
 	def goUp(self):
 		self.setDirectionUp()
@@ -57,16 +58,9 @@ class StepperDriver:
 		
 		self.startSleep()	
 	
-	def accelerationRamp():
-		for i in range(1, 201):
-			gpio.output(self.stepPin, 1)
-			time.sleep(0.02/(i/10))
-			gpio.output(self.stepPin, 0)
-			time.sleep(0.02/(i/10))
-
-	
 	def startSleep(self): gpio.output(self.sleepPin, 0)
-	def endSleep(self): gpio.output(self.sleepPin, 1)
+	def endSleep(self):	
+		gpio.output(self.sleepPin, 1)
 	
 	def setDirectionUp(self): gpio.output(self.dirPin, 0)
 	def setDirectionDown(self): gpio.output(self.dirPin, 1)
