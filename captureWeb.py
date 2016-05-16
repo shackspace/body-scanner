@@ -73,19 +73,19 @@ def processThread(transformationMatrix, laserThreshold, cam):
 		objString += process(img, sliceNr)
 
 @app.route("/")
-def get_index(): return send_from_directory("index.html")
+def get_index(): return send_from_directory(".", "index.html")
 
 @app.route("/index.js")
-def get_index_js(): return send_from_directory("index.js")
+def get_index_js(): return send_from_directory(".", "index.js")
 
 @app.route("/stylesheet.css")
-def get_css(): return send_from_directory("stylesheet.css")
+def get_css(): return send_from_directory(".", "stylesheet.css")
 
 @app.route("/camera")
-def get_camera(): return send_from_directory("camera.html")
+def get_camera(): return send_from_directory(".", "camera.html")
 
 @app.route("/camera.js")
-def get_camera_js(): return send_from_directory("camera.js")
+def get_camera_js(): return send_from_directory(".", "camera.js")
 
 @app.route("/api/up", methods=["PUT"])
 def put_up():
