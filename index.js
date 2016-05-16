@@ -3,4 +3,5 @@ function bottom() {
 	xhttp.onreadystatechange = function(){};
 	xhttp.open("PUT", "/api/bottom", true);
 	xhttp.send();
+	console.log("ASIDIAISDI")
 }
