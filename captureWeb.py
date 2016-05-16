@@ -75,39 +75,39 @@ def processThread(transformationMatrix, laserThreshold, cam):
 @app.route("/")
 def get_index(): return send_from_directory("index.html")
 
-@app.route("index.js")
+@app.route("/index.js")
 def get_index_js(): return send_from_directory("index.js")
 
-@app.route("stylesheet.css")
+@app.route("/stylesheet.css")
 def get_css(): return send_from_directory("stylesheet.css")
 
-@app.route("camera")
+@app.route("/camera")
 def get_camera(): return send_from_directory("camera.html")
 
-@app.route("camera.js")
+@app.route("/camera.js")
 def get_camera_js(): return send_from_directory("camera.js")
 
-@app.route("api/up", methods=["PUT"])
+@app.route("/api/up", methods=["PUT"])
 def put_up():
 	global stepper
 	stepper.goUp()
 
-@app.route("api/down", methods=["PUT"])
+@app.route("/api/down", methods=["PUT"])
 def put_down():
 	global stepper
 	stepper.goDown()
 	
-@app.route("api/bottom", methods=["PUT"])
+@app.route("/api/bottom", methods=["PUT"])
 def put_down():
 	global stepper
 	stepper.goBottom()
 
-@app.route("api/top", methods=["PUT"])
+@app.route("/api/top", methods=["PUT"])
 def put_top():
 	global stepper
 	stepper.goTop()
 
-@app.route("api/scan", methods=["PUT"])
+@app.route("/api/scan", methods=["PUT"])
 def put_scan():
 	global stepper
 	
