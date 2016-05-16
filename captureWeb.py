@@ -16,6 +16,8 @@ sliceCount = 800
 imageQueue = [] #Queue for the threads to fetch images from
 objString = "" #The final objfile that will be writte
 
+app = Flask(__name__)
+
 #Read the caloibration Matrix
 try: transformationMatrix = numpy.loadtxt("calibration.txt")
 except: transformationMatrix = None
