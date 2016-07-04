@@ -6,12 +6,19 @@ from pyA20.gpio import port
 class StepperDriver:
 	def doStep(self, steps=200):
 		self.endSleep()
+
+		if steps > 50:
+			for i in range(1, 50):
+				gpio.output(self.stepPin, 1)
+				time.sleep(0.05/i) 
+				gpio.output(self.stepPin, 0)
+				time.sleep(0.05/i)
 	
-		for i in range(0, steps):
-			gpio.output(self.stepPin, 1)
-			time.sleep(0.001) 
-			gpio.output(self.stepPin, 0)
-			time.sleep(0.001) 
+			for i in range(0, steps):
+				gpio.output(self.stepPin, 1)
+				time.sleep(0.001) 
+				gpio.output(self.stepPin, 0)
+				time.sleep(0.001) 
 	
 		self.startSleep()
 	
@@ -59,11 +66,10 @@ class StepperDriver:
 		self.startSleep()	
 	
 	def startSleep(self): gpio.output(self.sleepPin, 0)
-	def endSleep(self):	
-		gpio.output(self.sleepPin, 1)
+	def endSleep(self):	gpio.output(self.sleepPin, 1)
 	
-	def setDirectionUp(self): gpio.output(self.dirPin, 0)
-	def setDirectionDown(self): gpio.output(self.dirPin, 1)
+	def setDirectionUp(self): gpio.output(self.dirPin, 1)
+	def setDirectionDown(self): gpio.output(self.dirPin, 0)
 	
 		
 	def __init__(self):
@@ -73,6 +79,8 @@ class StepperDriver:
 		self.sleepPin = port.PA9 #Sleep Pin of the Polulu
 		self.stepPin = port.PA10 #Step Pin of the Polulu
 		self.dirPin = port.PA20 #Direction Pin of the Polulu
+		
+		#Dont forget to set RESET and MS1 to HIGH (Half Step)
 		
 		self.height = 34700
 		
