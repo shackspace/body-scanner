@@ -1,7 +1,7 @@
 import cv2, threading, time, glob
 
 class Camera:
-	def captureThread(self, BUFFERSIZE):
+	def captureThread(self, BUFFERSIZE, PRINT_SKIPPED):
 		try:
 			framecounter = 0
 			while self.capture:
@@ -9,7 +9,7 @@ class Camera:
 				if s:
 					if len(self.frameBuffer) == BUFFERSIZE: 
 						self.frameBuffer.pop(0)
-						print("Discarding Frame")
+						if PRINT_SKIPPED: print("Discarding Frame")
 						
 					self.frameBuffer.append((framecounter, img))
 					framecounter += 1
@@ -26,7 +26,7 @@ class Camera:
 		print("Releasing camera")
 		self.capture = False
 		
-	def __init__(self, WIDTH, HEIGHT, BUFFERSIZE=1, CAMID=-1, INITTIME=2):
+	def __init__(self, WIDTH, HEIGHT, BUFFERSIZE=1, CAMID=-1, INITTIME=2, PRINT_SKIPPED=True):
 		if CAMID == -1:	CAMID = max(map(lambda x: x.split("video")[1], glob.glob("/dev/video*"))) #Find the latest attached system camera
 		print("Using camera /dev/video" + CAMID)
 		self.cam = cv2.VideoCapture(int(CAMID))
@@ -34,6 +34,6 @@ class Camera:
 		self.cam.set(4, HEIGHT)
 		self.capture = True
 		self.frameBuffer = []
-		self.captureThread = threading.Thread(target=self.captureThread, args=[BUFFERSIZE]).start()
+		self.captureThread = threading.Thread(target=self.captureThread, args=[BUFFERSIZE, PRINT_SKIPPED]).start()
 		
 		time.sleep(INITTIME) #Wait for the camera to warm up (Auto ISO, Whitebalance)

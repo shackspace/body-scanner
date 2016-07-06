@@ -4,7 +4,6 @@ import time, numpy, sys
 from Camera import Camera
 import cv2
 import cv2.cv as cv
-import serial
 from StepperDriver import StepperDriver
 
 captureWidth = 1280 #Width of camera picture
@@ -21,12 +20,10 @@ def countdown(duration, event=""):
 
 	print(event)
 
-ser = StepperDriver().serial
-time.sleep(1)
-ser.write("u") #This command will be lost
-ser.write("r") #Reset the axis
-print("Resetting axis")
-time.sleep(3)
+s = StepperDriver()
+print("Resetting axis...")
+s.goUp()
+s.goBottom() #Reset the axis
 
 try:
 	#Gather the setup vectors
@@ -39,7 +36,7 @@ try:
 	for corner in range(1, 5):
 		edgeFound = False
 		while not edgeFound:
-			raw_input("Press Enter and laserpoint " + str(corner) + 	"'d edge")
+			raw_input("Press Enter and laserpoint " + str(corner) + "'d edge")
 			countdown(3, "Picture taken")
 			channelB, channelG, channelR = cv2.split(cam.getFrame())
 			mask = cv2.absdiff(baseImgChannelB, channelR)
@@ -50,8 +47,7 @@ try:
 			contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 			cv2.drawContours(baseImg, contours, -1, (0,255,0), 3)		
 		
-			#cv2.imshow("Mask", baseImg)
-			#cv2.waitKey(0)
+			cv2.imwrite("calibration_corner" + corner + ".png", baseImg)
 		
 			if len(contours) > 1:
 				print("More than one edge found, please repeat this edge")
@@ -68,8 +64,7 @@ try:
 				sourceMatrix.append([center[0], center[1]])
 				edgeFound = True
 	
-	cv2.imshow("Mask", baseImg)
-	cv2.waitKey(0)
+	cv2.imwrite("calibration_corners.png", baseImg)
 	
 	#Resort the matrix to make sure we have a planar projection (no foldings)
 	normalizedSource = []
@@ -99,8 +94,7 @@ try:
 	print(transformationMatrix)
 	dst = cv2.warpPerspective(baseImg, transformationMatrix , (720,720), flags=cv2.INTER_NEAREST)
 
-	cv2.imshow("Mask", dst)
-	cv2.waitKey(0)
+	cv2.imwrite("calibration_final.png", dst)
 	cam.release()
 	
 	print("Writing transformation matrix...")

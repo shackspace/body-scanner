@@ -6,31 +6,32 @@ from pyA20.gpio import port
 class StepperDriver:
 	def doStep(self, steps=200):
 		self.endSleep()
-
 		if steps > 50:
-			for i in range(1, 50):
-				gpio.output(self.stepPin, 1)
-				time.sleep(0.05/i) 
-				gpio.output(self.stepPin, 0)
-				time.sleep(0.05/i)
-	
-			for i in range(0, steps):
+			self.doRamp(steps=50)
+			for i in range(0, steps-50):
 				gpio.output(self.stepPin, 1)
 				time.sleep(0.001) 
 				gpio.output(self.stepPin, 0)
 				time.sleep(0.001) 
+		else:
+			self.doRamp(steps=steps)
 	
 		self.startSleep()
 	
-	def doStop(): self.stopped = True
+	def doRamp(steps=50):
+		for i in range(1, steps):
+			gpio.output(self.stepPin, 1)
+			time.sleep(0.05/i) 
+			gpio.output(self.stepPin, 0)
+			time.sleep(0.05/i)
 	
-	def goUp(self):
+	def goUp(self, steps=200):
 		self.setDirectionUp()
-		self.doStep()
+		self.doStep(steps=steps)
 	
-	def goDown(self):
+	def goDown(self, steps=200):
 		self.setDirectionDown()
-		self.doStep()
+		self.doStep(steps=steps)
 	
 	def goBottom(self):
 		self.setDirectionDown()
@@ -42,7 +43,7 @@ class StepperDriver:
 			else: debounce = 0
 			
 			if debounce > 5:
-				self.goUp() #Move the sledge out of the sensor
+				self.goUp(steps=50) #Move the sledge out of the sensor
 				self.startSleep()
 				break
 			
@@ -82,7 +83,7 @@ class StepperDriver:
 		
 		#Dont forget to set RESET and MS1 to HIGH (Half Step)
 		
-		self.height = 34700
+		self.height = 8300
 		
 		#Configure the Pins
 		gpio.setcfg(self.sensorPin, gpio.INPUT)

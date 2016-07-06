@@ -66,16 +66,15 @@ def processThread(transformationMatrix, laserThreshold, cam):
 		img = cv2.warpPerspective(img, transformationMatrix, (720,720), flags=cv2.INTER_LANCZOS4)
 		objString += process(img, sliceNr)
 		
-ser = StepperDriver().serial
-time.sleep(1)
-ser.write("u") #This command will be lost
-ser.write("r") #Reset the axis
-time.sleep(2)
+s = StepperDriver()
+print("Resetting axis...")
+s.goUp()
+s.goBottom() #Reset the axis
 
 try:
 	raw_input("Press Enter to start the scanning process")
 	objString = ""
-	ser.write("s") #Move to the top while we scan	
+	threading.Thread(target=StepperDriver.goTop) #Move to the top while we scan
 	scanning = True
 	cam = Camera(captureWidth, captureHeight, 120) #Up to 120 images will be held in the cache before discarding images from the cache
 	
