@@ -22,6 +22,14 @@ def start_scan():
 	threading.Thread(target=go_top_then_stop_image_server, args=(s, imageServer)).start() #Go to top in the background, then stop the image server
 	return "started" #Return so the client knows that he can start reveiving images
 
+@app.route("/api/live")
+def return capture():
+	cam = Camera(captureWidth, captureHeight)
+	picture = cam.getFrame()
+	cv2.imencode(".jpg", picture, [cv2.IMWRITE_JPEG_QUALITY, 95])
+	cv2.imwrite("capture.jpg", pciture)
+	return send_from_directory(".", "capture.jpg")
+
 @app.route("/api/calibrate")
 def calibrate_wrapper():
 
