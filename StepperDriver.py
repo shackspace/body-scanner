@@ -56,7 +56,7 @@ class StepperDriver:
 		self.startSleep()
 	
 	def goTop(self):
-		self.DirectionUp()
+		self.setDirectionUp()
 		self.endSleep()
 		
 		self.doRamp()
