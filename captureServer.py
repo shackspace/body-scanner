@@ -22,13 +22,14 @@ def start_scan():
 	threading.Thread(target=go_top_then_stop_image_server, args=(s, imageServer)).start() #Go to top in the background, then stop the image server
 	return "started" #Return so the client knows that he can start reveiving images
 
+def countdown(duration, event=""):
+	for i in range(duration, 0, -1):
+		yield str(i) + " "
+		time.sleep(1)
+	yield event
+
 @app.route("/api/calibrate")
 def calibrate_wrapper():
-	def countdown(duration, event=""):
-		for i in range(duration, 0, -1):
-			yield str(i) + " "
-			time.sleep(1)
-		yield event
 
 	def calibrate():
 		captureWidth = 1280 #Width of camera picture
@@ -63,10 +64,10 @@ def calibrate_wrapper():
 				cv2.imwrite("calibration_corner" + str(corner) + ".png", baseImg)
 		
 				if len(contours) > 1:
-					yield "More than one edge found, please repeat this edge"
+					yield "More than one edge found, please repeat this edge\n"
 				
 				elif len(contours) == 0:
-					yield "No edge found, please repeat this edge"
+					yield "No edge found, please repeat this edge\n"
 				
 				else:
 					contour = contours[0]#Select the first and hopefully only recognized contour
