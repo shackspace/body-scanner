@@ -151,4 +151,4 @@ def stepper_sleep():
 
 s = StepperDriver() #Initialize the Stepper
 if __name__ == '__main__':
-	app.run(host="0.0.0.0")
+	app.run(host="0.0.0.0", debug=True)
