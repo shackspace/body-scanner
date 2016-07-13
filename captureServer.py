@@ -1,6 +1,6 @@
 from __future__ import print_function
 from flask import Flask, Response, send_from_directory
-import time, numpy, sys, threading
+import time, numpy, sys, threading, subprocess
 from Camera import Camera
 import cv2
 import cv2.cv as cv
@@ -10,7 +10,7 @@ from ImageServer import ImageServer
 app = Flask(__name__)
 
 def go_top_then_stop_image_server(stepperDriver, imageServer):
-	stepperDriver.goTop()
+	subprocess.call(["python", "goTop.py"])
 	imageServer.stopServer()
 
 @app.route("/api/scan")
