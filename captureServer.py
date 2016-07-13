@@ -23,6 +23,8 @@ def start_scan():
 
 @app.route("/api/live")
 def capture():
+	try: cam.release()
+	except: print("Camera was good, no need to release")
 	cam = Camera(1280, 720)
 	capture = cam.getFrame(turn=True)
 	cv2.imencode(".jpg", capture, [cv2.IMWRITE_JPEG_QUALITY, 95])
@@ -37,6 +39,8 @@ def calibrate_wrapper():
 		captureWidth = 1280 #Width of camera picture
 		captureHeight = 720 #Height of camera picture
 		laserTreshold = 100 #Tune this value for laser detection (100 for Logitech)
+		try: cam.release()
+		except: print("Camera was good, no need to release")
 		cam = Camera(captureWidth, captureHeight)
 		yield "Resetting axis...\n"
 		s.goUp()
@@ -54,7 +58,7 @@ def calibrate_wrapper():
 			while not edgeFound:
 				yield "Laserpoint " + str(corner) + "'d edge\n"
 				
-				for i in range(3, 0, -1):
+				for i in range(5, 0, -1):
 					yield str(i) + " \n"
 					time.sleep(1)
 				yield "Picture taken\n"
@@ -112,7 +116,7 @@ def calibrate_wrapper():
 			return 
 		
 		yield "Your coefficients are:\n"
-		yield str(transformationMatrix)
+		yield str(transformationMatrix) + "\n"
 		dst = cv2.warpPerspective(baseImg, transformationMatrix , (720,720), flags=cv2.INTER_NEAREST)
 
 		cv2.imwrite("calibration_final.png", dst)
@@ -162,5 +166,7 @@ def stepper_sleep():
 	return "ok"
 
 s = StepperDriver() #Initialize the Stepper
+cam = None #Link to the camera to kill it if it stalled
+
 if __name__ == '__main__':
 	app.run(host="0.0.0.0", debug=True)
