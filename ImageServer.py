@@ -26,7 +26,7 @@ class ImageServer:
 		
 			connection.send(struct.pack(">I", len(img))) #Send the 4 byte length prefix
 			connection.send(struct.pack(">I", sliceNr)) #Send the 4 byte sliceNr
-			connection.sendall(img) #Send the actual image
+			connection.sendall(img.tostring()) #Send the actual image
 		
 			print(str(1/(time.time()-st)) + "fps")
 
