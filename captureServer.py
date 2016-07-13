@@ -23,7 +23,7 @@ def start_scan():
 	return "started" #Return so the client knows that he can start reveiving images
 
 @app.route("/api/live")
-def return capture():
+def capture():
 	cam = Camera(captureWidth, captureHeight)
 	picture = cam.getFrame()
 	cv2.imencode(".jpg", picture, [cv2.IMWRITE_JPEG_QUALITY, 95])
