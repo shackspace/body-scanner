@@ -45,5 +45,5 @@ class ImageServer:
 	def __init__(self, captureWidth=1280, captureHeight=720, buffersize=1):
 		self.serve = True
 		self.serverReady = False
-		serverThread = threading.Thread(target=imageServerThread, args=(captureWdith, captureHeight, buffersize))
+		serverThread = threading.Thread(target=self.imageServerThread, args=(captureWdith, captureHeight, buffersize))
 		serverThread.start()
