@@ -22,7 +22,8 @@ class Camera:
 		#Rotate the image if needed. TODO: Client side implementation for performance reasons
 		if turn:
 			M = cv2.getRotationMatrix2D((640, 360), 180, 1.0)
-			frame[1] = cv2.warpAffine(frame[1], M, (1280, 720))
+			rotated = cv2.warpAffine(frame[1], M, (1280, 720))
+			frame = (frame[0], rotated)
 			
 		if includeFramecounter: return frame #Return the tuple including the framecount
 		else: return frame[1] #Only return the image
