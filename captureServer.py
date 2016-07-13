@@ -24,6 +24,7 @@ def start_scan():
 
 @app.route("/api/live")
 def capture():
+	global captureWidth, captureHeight
 	cam = Camera(captureWidth, captureHeight)
 	picture = cam.getFrame()
 	cv2.imencode(".jpg", picture, [cv2.IMWRITE_JPEG_QUALITY, 95])
