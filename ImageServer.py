@@ -9,9 +9,10 @@ class ImageServer:
 		imageServerSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		imageServerSock.bind((bindIP, bindPort))
 		imageServerSock.listen(1)
+		self.serverReady = True
+		
 		connection, client_address = imageServerSock.accept()
 	
-		self.serverReady = True
 		while self.serve == True:
 			st = time.time()
 			try: sliceNr, img = cam.getFrame(True) #Get the first image inside the queue including the framenumber
@@ -38,7 +39,6 @@ class ImageServer:
 		self.serve = False
 
 	def isReady(self):
-		print(self.serverReady)
 		return self.serverReady
 
 	def __init__(self, captureWidth=1280, captureHeight=720, buffersize=1):
