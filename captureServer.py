@@ -144,7 +144,7 @@ def stepper_bottom():
 	global s
 	s.goBottom()
 	
-@appr.route("/api/stepper/sleep")
+@app.route("/api/stepper/sleep")
 def stepper_sleep():
 	global s
 	s.startSleep()
