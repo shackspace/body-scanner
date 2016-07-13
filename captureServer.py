@@ -17,7 +17,7 @@ def go_top_then_stop_image_server(stepperDriver, imageServer):
 def start_scan():
 	s.goBottom()
 	imageServer = ImageServer(captureWidth=1280, captureHeight=720, buffersize=60)
-	print("Image server running")
+	print("Image Server running")
 	while imageServer.isReady() == False: time.sleep(0.01) #Wait for the server to ramp up
 	threading.Thread(target=go_top_then_stop_image_server, args=(s, imageServer)).start() #Go to top in the background, then stop the image server
 	print("Stepper is moving")

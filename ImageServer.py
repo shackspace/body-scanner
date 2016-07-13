@@ -38,6 +38,7 @@ class ImageServer:
 		self.serve = False
 
 	def isReady(self):
+		print(self.serverReady)
 		return self.serverReady
 
 	def __init__(self, captureWidth=1280, captureHeight=720, buffersize=1):
