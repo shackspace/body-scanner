@@ -22,7 +22,7 @@ def start_scan():
 	threading.Thread(target=go_top_then_stop_image_server, args=(s, imageServer)).start() #Go to top in the background, then stop the image server
 	return "started" #Return so the client knows that he can start reveiving images
 
-@app.route("/api/calibrate/start")
+@app.route("/api/calibrate")
 def calibrate_wrapper():
 	def countdown(duration, event=""):
 		for i in range(duration, 0, -1):
@@ -35,7 +35,6 @@ def calibrate_wrapper():
 		captureHeight = 720 #Height of camera picture
 		laserTreshold = 100 #Tune this value for laser detection (100 for Logitech)
 		cam = Camera(captureWidth, captureHeight)
-		yield "<pre>"
 		yield "Resetting axis...\n"
 		s.goUp()
 		s.goBottom()
@@ -61,7 +60,7 @@ def calibrate_wrapper():
 				contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 				cv2.drawContours(baseImg, contours, -1, (0,255,0), 3)		
 		
-				cv2.imwrite("calibration_corner" + corner + ".png", baseImg)
+				cv2.imwrite("calibration_corner" + str(corner) + ".png", baseImg)
 		
 				if len(contours) > 1:
 					yield "More than one edge found, please repeat this edge"
