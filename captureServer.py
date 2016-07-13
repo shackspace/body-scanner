@@ -128,26 +128,31 @@ def sendCropImage():
 def stepper_up():
 	global s
 	s.goUp()
+	return "ok"
 	
 @app.route("/api/stepper/down")
 def stepper_down():
 	global s
 	s.goDown()
+	return "ok"
 	
 @app.route("/api/stepper/top")
 def stepper_top():
 	global s
 	s.goTop()
+	return "ok"
 
 @app.route("/api/stepper/bottom")
 def stepper_bottom():
 	global s
 	s.goBottom()
+	return "ok"
 	
 @app.route("/api/stepper/sleep")
 def stepper_sleep():
 	global s
 	s.startSleep()
+	return "ok"
 
 s = StepperDriver() #Initialize the Stepper
 if __name__ == '__main__':
