@@ -27,6 +27,7 @@ def capture():
 	capture = cam.getFrame()
 	cv2.imencode(".jpg", capture, [cv2.IMWRITE_JPEG_QUALITY, 95])
 	cv2.imwrite("capture.jpg", capture)
+	cam.release()
 	return send_from_directory(".", "capture.jpg")
 
 @app.route("/api/calibrate")
