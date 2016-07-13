@@ -52,7 +52,7 @@ def processThread(transformationMatrix, laserTreshold, imageClient):
 			continue #Retry to grab a frame
 		
 		print("Processing slice " + str(sliceNr))
-		img = preprocess(img, laserThreshold)
+		img = preprocess(img, laserTreshold)
 		img = cv2.warpPerspective(img, transformationMatrix, (720,720), flags=cv2.INTER_LANCZOS4)
 		objString += process(img, sliceNr)
 
