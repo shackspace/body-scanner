@@ -1,5 +1,5 @@
 from __future__ import print_function
-import time, numpy, sys, requests
+import time, numpy, sys, requests, threading
 import cv2
 import cv2.cv as cv
 from ImageClient import ImageClient
@@ -59,8 +59,11 @@ def processThread(transformationMatrix, laserTreshold, imageClient):
 #Download the calibration matrix
 print("Downloading transformation matrix...")
 r = requests.get("http://" + HOST + "/api/calibrate/matrix")
-print(r.content)
-transformationMatrix = numpy.fromstring(r.content)
+matrix = "\n".join(r.content.split("\n")[0:3]) #Only use the first 3 lines
+f = open("calibration.txt","w")
+f.write(matrix)
+f.close()
+transformationMatrix = numpy.loadtxt("calibration.txt")
 
 #Download the crop image
 print("Downloading crop image...")
@@ -78,10 +81,14 @@ imageClient = ImageClient(HOST, PORT)
 
 print("Retrieval started, starting computation threads...")
 computationThreads = []
-t1 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient)).start()
-t2 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient)).start()
+t1 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient))
+t2 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient))
 
 #Wait for the image computation to finish
+t1.daemon = True
+t2.daemon = True
+t1.start()
+t2.start()
 t1.join()
 t2.join()
 

@@ -16,7 +16,7 @@ def go_top_then_stop_image_server(stepperDriver, imageServer):
 @app.route("/api/scan")
 def start_scan():
 	s.goBottom()
-	imageServer = ImageServer.ImageServer(captureWidth=1280, captureHeight=720, buffersize=60)
+	imageServer = ImageServer(captureWidth=1280, captureHeight=720, buffersize=60)
 	while imageServer.isReady() == False: time.sleep(0.01) #Wait for the server to ramp up
 	threading.Thread(target=go_top_then_stop_image_server, args=(s, imageServer)).start() #Go to top in the background, then stop the image server
 	return "started" #Return so the client knows that he can start reveiving images

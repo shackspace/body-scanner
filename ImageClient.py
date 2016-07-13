@@ -29,7 +29,9 @@ class ImageClient:
 	def __init__(self, hostIP, hostPort):
 		self.receiving = True
 		self.imageQueue = []
-		t = threading.Thread(target=receiverThread, args=(hostIP, hostPort))
+		t = threading.Thread(target=self.receiverThread, args=(hostIP, hostPort))
+		t.daemon = True
 		t.start()
+		t.join()
 
 
