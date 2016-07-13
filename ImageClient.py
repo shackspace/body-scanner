@@ -1,5 +1,7 @@
 import time, numpy, sys, socket, struct
 import threading
+import cv2
+import cv2.cv as cv
 
 class ImageClient:
 	def receiverThread(self, hostIP, hostPort):	
