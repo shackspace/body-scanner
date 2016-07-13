@@ -47,9 +47,9 @@ def calibrate_wrapper():
 				yield "Laserpoint " + str(corner) + "'d edge\n"
 				
 				for i in range(3, 0, -1):
-					yield str(i) + " "
+					yield str(i) + " \n"
 					time.sleep(1)
-				yield "Picture taken"
+				yield "Picture taken\n"
 
 				channelB, channelG, channelR = cv2.split(cam.getFrame())
 				mask = cv2.absdiff(baseImgChannelB, channelR)
