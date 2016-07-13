@@ -86,7 +86,7 @@ class StepperDriver:
 		
 		#Dont forget to set RESET and MS1 to HIGH (Half Step)
 		
-		self.height = 8300
+		self.height = 8450
 		
 		#Configure the Pins
 		gpio.setcfg(self.sensorPin, gpio.INPUT)

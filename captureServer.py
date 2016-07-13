@@ -4,7 +4,7 @@ import time, numpy, sys
 from Camera import Camera
 import cv2
 import cv2.cv as cv
-#from StepperDriver import StepperDriver
+from StepperDriver import StepperDriver
 from ImageServer import ImageServer
 
 app = Flask(__name__)
@@ -149,8 +149,6 @@ def stepper_sleep():
 	global s
 	s.startSleep()
 
-#s = StepperDriver() #Initialize the Stepper
+s = StepperDriver() #Initialize the Stepper
 if __name__ == '__main__':
 	app.run()
-
-s = StepperDriver()
