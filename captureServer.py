@@ -24,9 +24,9 @@ def start_scan():
 @app.route("/api/live")
 def capture():
 	cam = Camera(1280, 720)
-	picture = cam.getFrame()
-	cv2.imencode(".jpg", picture, [cv2.IMWRITE_JPEG_QUALITY, 95])
-	cv2.imwrite("capture.jpg", pciture)
+	capture = cam.getFrame()
+	cv2.imencode(".jpg", capture, [cv2.IMWRITE_JPEG_QUALITY, 95])
+	cv2.imwrite("capture.jpg", capture)
 	return send_from_directory(".", "capture.jpg")
 
 @app.route("/api/calibrate")
