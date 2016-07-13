@@ -18,7 +18,7 @@ class StepperDriver:
 	
 		self.startSleep()
 	
-	def doRamp(steps=50):
+	def doRamp(steps):
 		for i in range(1, steps):
 			gpio.output(self.stepPin, 1)
 			time.sleep(0.05/i) 
