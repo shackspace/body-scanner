@@ -23,8 +23,6 @@ class ImageServer:
 			ret, img = cv2.threshold(img, 8, 255, cv2.THRESH_TOZERO) #Tresh to help image compression
 			ret, img = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 95]) 
 		
-			#img = cPickle.dumps(img)
-		
 			connection.send(struct.pack(">I", len(img))) #Send the 4 byte length prefix
 			connection.send(struct.pack(">I", sliceNr)) #Send the 4 byte sliceNr
 			connection.sendall(img) #Send the actual image
@@ -47,3 +45,4 @@ class ImageServer:
 		self.serverReady = False
 		serverThread = threading.Thread(target=self.imageServerThread, args=(captureWidth, captureHeight, buffersize))
 		serverThread.start()
+		print("Image Server started")
