@@ -24,7 +24,7 @@ def start_scan():
 @app.route("/api/live")
 def capture():
 	cam = Camera(1280, 720)
-	capture = cam.getFrame()
+	capture = cam.getFrame(turn=True)
 	cv2.imencode(".jpg", capture, [cv2.IMWRITE_JPEG_QUALITY, 95])
 	cv2.imwrite("capture.jpg", capture)
 	cam.release()

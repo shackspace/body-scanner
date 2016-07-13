@@ -14,9 +14,16 @@ class Camera:
 				self.frameBuffer.append((framecounter, img))
 				framecounter += 1
 	
-	def getFrame(self, includeFramecounter=False):
+	def getFrame(self, includeFramecounter=False, turn=False):
 		#Gives back the first frame inside the buffer and removes it from the buffer
 		while len(self.frameBuffer) == 0: time.sleep(0.01) #Busywait for a new frame to appear
+		frame = self.framebuffer.pop(0)
+		
+		#Rotate the image if needed. TODO: Client side implementation for performance reasons
+		if turn:
+			M = cv2.getRotationMatrix2D((640, 360), 180, 1.0)
+			frame[1] = cv2.warpAffine(frame[1], M, (1280, 720))
+			
 		if includeFramecounter: return self.frameBuffer.pop(0) #Return the tuple including the framecount
 		else: return self.frameBuffer.pop(0)[1] #Only return the image
 	
