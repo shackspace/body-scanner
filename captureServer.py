@@ -169,4 +169,4 @@ s = StepperDriver() #Initialize the Stepper
 cam = None #Link to the camera to kill it if it stalled
 
 if __name__ == '__main__':
-	app.run(host="0.0.0.0", debug=True)
+	app.run(host="0.0.0.0", port=80, debug=True)

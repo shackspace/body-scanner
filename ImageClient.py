@@ -20,7 +20,7 @@ class ImageClient:
 				recvData += imageClientSock.recv(8192) #Append the packet
 			while len(recvData) != imageLength:	recvData += imageClientSock.recv(imageLength-len(recvData)) #Receive the rest
 		
-			self.imageQueue.append((sliceNr, cv2.imdecode(img))
+			self.imageQueue.append((sliceNr, cv2.imdecode(img)))
 	
 	def getFrame(self, includeFramecounter=False):
 		if includeFramecounter: return self.imageQueue.pop(0) #Return the tuple including the framecount

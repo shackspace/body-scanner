@@ -4,7 +4,7 @@ import cv2
 import cv2.cv as cv
 from ImageClient import ImageClient
 
-HOST = "127.0.0.1"
+HOST = "10.42.23.133"
 PORT = 5010
 LASER_TRESHHOLD = 12
 
@@ -78,8 +78,8 @@ imageClient = ImageClient(HOST, PORT)
 
 print("Retrieval started, starting computation threads...")
 computationThreads = []
-t1 = threading.Thread(target?processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient).start()
-t2 = threading.Thread(target?processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient).start()
+t1 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient)).start()
+t2 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient)).start()
 
 #Wait for the image computation to finish
 t1.join()
