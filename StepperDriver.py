@@ -1,5 +1,5 @@
 import glob, sys, time, os
-if not os.getegid() == 0: sys.exit("Run as root for serial port access")
+if not os.getegid() == 0: sys.exit("Run as root for serial port access.")
 from pyA20.gpio import gpio
 from pyA20.gpio import port
 
