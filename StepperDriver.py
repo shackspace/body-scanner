@@ -18,7 +18,7 @@ class StepperDriver:
 	
 		self.startSleep()
 	
-	def doRamp(self, steps):
+	def doRamp(self, steps=50):
 		for i in range(1, steps):
 			gpio.output(self.stepPin, 1)
 			time.sleep(0.05/i) 
@@ -36,9 +36,10 @@ class StepperDriver:
 	def goBottom(self):
 		self.setDirectionDown()
 		self.endSleep()
+		self.doRamp()
 		
 		debounce = 0
-		for i in range(0, self.height):
+		for i in range(0, self.height-50):
 			if gpio.input(self.sensorPin) == 0: debounce += 1
 			else: debounce = 0
 			
@@ -58,7 +59,9 @@ class StepperDriver:
 		self.DirectionUp()
 		self.endSleep()
 		
-		for i in range(0, self.height):
+		self.doRamp()
+		
+		for i in range(0, self.height-50):
 			gpio.output(self.stepPin, 1)
 			time.sleep(0.001)
 			gpio.output(self.stepPin, 0)
