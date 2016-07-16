@@ -5,7 +5,7 @@ import cv2.cv as cv
 from ImageClient import ImageClient
 
 HOST = "10.42.23.133"
-PORT = 5010
+PORT = 80
 LASER_TRESHHOLD = 12
 
 objString = ""

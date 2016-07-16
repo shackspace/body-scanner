@@ -87,7 +87,7 @@ void goBottom(){
 	endSleep();
 	doRamp();
 	
-	for(long i=0; i<height; i++) {
+	for(long i=0; i<(height+200); i++) {
 		if(!(digitalRead(sensorPin))){debounce++;}
 		else{debounce=0;}
 		

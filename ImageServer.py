@@ -12,6 +12,7 @@ class ImageServer:
 		self.serverReady = True
 		
 		connection, client_address = imageServerSock.accept()
+		print("Connection accepted")
 	
 		while self.serve == True:
 			st = time.time()
