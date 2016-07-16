@@ -9,7 +9,7 @@ class Camera:
 				if len(self.frameBuffer) == BUFFERSIZE: 
 					self.frameBuffer.pop(0)
 					if PRINT_SKIPPED: 
-						PRINT_SKIPPED=False
+						print("Camera buffer overflow")
 					
 				self.frameBuffer.append((framecounter, img))
 				framecounter += 1

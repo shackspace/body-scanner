@@ -23,7 +23,7 @@ class ImageServer:
 				continue #Retry to grab a frame
 
 			print("Sending slice " + str(sliceNr))	
-			ret, img = cv2.threshold(img, 8, 255, cv2.THRESH_TOZERO) #Tresh to help image compression
+			ret, img = cv2.threshold(img, 8, 255, cv2.THRESH_TOZERO) #Tresh to help image compression (costs no performance)
 			ret, img = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 95]) 
 		
 			connection.send(struct.pack(">I", len(img))) #Send the 4 byte length prefix
