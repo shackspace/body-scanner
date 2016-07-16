@@ -5,7 +5,7 @@ import cv2.cv as cv
 from ImageClient import ImageClient
 
 HOST = "10.42.23.133"
-PORT = 80
+PORT = 5010
 LASER_TRESHHOLD = 12
 
 objString = ""
@@ -41,6 +41,7 @@ def process(img, z):
 	
 	#cv2.imshow("Diagonal Maxima", maximaImg)
 	#cv2.waitKey(10)
+	print(objString)
 	return objString
 
 def processThread(transformationMatrix, laserTreshold, imageClient):

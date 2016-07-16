@@ -11,7 +11,9 @@ app = Flask(__name__)
 
 def go_top_then_stop_image_server(stepperDriver, imageServer):
 	while imageServer.clientConnected == False: time.sleep(0.01) #Wait for the client to connect
-	stepperDriver.goTop()
+	print("Stepper is moving")
+	#stepperDriver.goTop()
+	time.sleep(5)
 	imageServer.stopServer()
 
 @app.route("/api/scan")
@@ -21,7 +23,7 @@ def start_scan():
 	print("Image Server running")
 	while imageServer.isReady() == False: time.sleep(0.01) #Wait for the server to ramp up
 	threading.Thread(target=go_top_then_stop_image_server, args=(s, imageServer)).start() #Go to top in the background, then stop the image server
-	print("Stepper is moving")
+
 	return "started" #Return so the client knows that he can start reveiving images
 
 @app.route("/api/live")
