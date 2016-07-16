@@ -51,7 +51,7 @@ def calibrate_wrapper():
 		
 		#Gather the setup vectors
 		yield "Shooting initial difference picture \n"
-		for i in range(3, 0, -1):
+		for i in range(4, 0, -1):
 			yield str(i) + " \n"
 			time.sleep(1)
 		baseImg = cam.getFrame()	
