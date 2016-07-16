@@ -43,3 +43,8 @@ class StepperDriver:
 		gpio.setcfg(self.serialPin1, gpio.OUTPUT)
 		gpio.setcfg(self.serialPin2, gpio.OUTPUT)
 		gpio.setcfg(self.statusPin, gpio.INPUT)
+		
+		#Set all to zero
+		gpio.output(self.enablePin, 0)
+		gpio.output(self.serialPin1, 0)
+		gpio.output(self.serialPin2, 0)
