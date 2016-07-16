@@ -91,6 +91,7 @@ def calibrate_wrapper():
 					(x,y), radius = cv2.minEnclosingCircle(contour)
 					center = (int(x),int(y))
 					radius = int(radius)
+					print("Dot found at " + str(center))
 					cv2.circle(baseImg , center, radius,(255,255,255), 2) #Visual feedback
 					sourceMatrix.append([center[0], center[1]])
 					edgeFound = True
