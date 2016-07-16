@@ -54,7 +54,7 @@ def calibrate_wrapper():
 		for i in range(4, 0, -1):
 			yield str(i) + " \n"
 			time.sleep(1)
-		baseImg = cam.getFrame()	
+		baseImg = cam.getFrame(turn=True)	
 		baseImgChannelB, baseImgChannelG, baseImgChannelR = cv2.split(baseImg)
 	
 		sourceMatrix = []
