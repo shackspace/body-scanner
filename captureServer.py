@@ -10,7 +10,7 @@ from ImageServer import ImageServer
 app = Flask(__name__)
 
 def go_top_then_stop_image_server(stepperDriver, imageServer):
-	subprocess.call(["python", "goTop.py"])
+	stepperDriver.goTop()
 	imageServer.stopServer()
 
 @app.route("/api/scan")

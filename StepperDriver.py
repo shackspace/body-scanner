@@ -84,7 +84,7 @@ class StepperDriver:
 		self.stepPin = port.PA10 #Step Pin of the Polulu
 		self.dirPin = port.PA20 #Direction Pin of the Polulu
 		
-		#Dont forget to set RESET and MS1 to HIGH (Half Step)
+		
 		
 		self.height = 8450
 		
