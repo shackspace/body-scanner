@@ -10,6 +10,7 @@ from ImageServer import ImageServer
 app = Flask(__name__)
 
 def go_top_then_stop_image_server(stepperDriver, imageServer):
+	while imageServer.clientConnected() == False: time.sleep(0.01) #Wait for the client to connect
 	stepperDriver.goTop()
 	imageServer.stopServer()
 
