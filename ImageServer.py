@@ -17,7 +17,7 @@ class ImageServer:
 	
 		while self.serve == True:
 			st = time.time()
-			try: sliceNr, img = cam.getFrame(True) #Get the first image inside the queue including the framenumber
+			try: sliceNr, img = cam.getFrame(includeFramecounter=True, turn=True) #Get the first image inside the queue including the framenumber
 			except IndexError: 
 				time.sleep(0.01) #The list was empty, wait for image to appear
 				continue #Retry to grab a frame
@@ -46,7 +46,7 @@ class ImageServer:
 	def __init__(self, captureWidth=1280, captureHeight=720, buffersize=1):
 		self.serve = True
 		self.serverReady = False
-		self.clientConnected = False
+		self.clientConnected = False	
 		serverThread = threading.Thread(target=self.imageServerThread, args=(captureWidth, captureHeight, buffersize))
 		serverThread.start()
 		print("Image Server started")
