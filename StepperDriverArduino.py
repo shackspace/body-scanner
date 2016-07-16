@@ -4,7 +4,7 @@ from pyA20.gpio import gpio
 from pyA20.gpio import port
 
 class StepperDriver:
-	def goUp():
+	def goUp(self):
 		gpio.output(self.serialPin1, 0)
 		gpio.output(self.serialPin2, 1)
 		fireCommand()
@@ -24,9 +24,9 @@ class StepperDriver:
 		gpio.output(self.serialPin2, 1)
 		fireCommand()
 
-	def fireCommand():
+	def fireCommand(self):
 		gpio.output(self.enablePin, 1)		
-		time.sleep(0.1) #Wait for the Arduino to read
+		time.sleep(0.05) #Wait for the Arduino to read
 		gpio.output(self.enablePin, 0)
 		while gpio.input(self.statusPin) == 0: time.sleep(0.1) #Wait for the driver to finish
 		
