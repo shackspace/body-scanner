@@ -7,22 +7,22 @@ class StepperDriver:
 	def goUp(self):
 		gpio.output(self.serialPin1, 0)
 		gpio.output(self.serialPin2, 1)
-		fireCommand()
+		self.fireCommand()
 			
 	def goDown(self):
 		gpio.output(self.serialPin1, 0)
 		gpio.output(self.serialPin2, 0)
-		fireCommand()
+		self.fireCommand()
 		
 	def goBottom(self):
 		gpio.output(self.serialPin1, 1)
 		gpio.output(self.serialPin2, 0)
-		fireCommand()
+		self.fireCommand()
 
 	def goTop(self):
 		gpio.output(self.serialPin1, 1)
 		gpio.output(self.serialPin2, 1)
-		fireCommand()
+		self.fireCommand()
 
 	def fireCommand(self):
 		gpio.output(self.enablePin, 1)		
