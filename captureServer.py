@@ -4,7 +4,7 @@ import time, numpy, sys, threading, subprocess
 from Camera import Camera
 import cv2
 import cv2.cv as cv
-from StepperDriver import StepperDriver
+from StepperDriverArduino import StepperDriver
 from ImageServer import ImageServer
 
 app = Flask(__name__)
