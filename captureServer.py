@@ -36,22 +36,24 @@ def capture():
 	cam.release()
 	return send_from_directory(".", "capture.jpg")
 
+
 @app.route("/api/calibrate")
 def calibrate_wrapper():
-
 	def calibrate():
 		captureWidth = 1280 #Width of camera picture
 		captureHeight = 720 #Height of camera picture
 		laserTreshold = 100 #Tune this value for laser detection (100 for Logitech)
-		try: cam.release()
-		except: print("Camera was good, no need to release")
 		cam = Camera(captureWidth, captureHeight)
+
 		yield "Resetting axis...\n"
 		s.goUp()
 		s.goBottom()
 		
 		#Gather the setup vectors
 		yield "Shooting initial difference picture \n"
+		for i in range(3, 0, -1):
+			yield str(i) + " \n"
+			time.sleep(1)
 		baseImg = cam.getFrame()	
 		baseImgChannelB, baseImgChannelG, baseImgChannelR = cv2.split(baseImg)
 	
@@ -170,7 +172,6 @@ def stepper_sleep():
 	return "ok"
 
 s = StepperDriver() #Initialize the Stepper
-cam = None #Link to the camera to kill it if it stalled
 
 if __name__ == '__main__':
 	app.run(host="0.0.0.0", port=80, debug=True)

@@ -17,6 +17,7 @@ def preprocess(img, laserThreshold):
 	
 	#Mask out everything thats not in the capture range
 	img = cv2.bitwise_and(img, img, mask=cropImage)
+	cv2.imwrite(str(time.time())[-5:] + "cropped_treshed.png", img)
 	return img
 
 def process(img, z):

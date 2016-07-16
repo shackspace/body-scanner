@@ -23,11 +23,6 @@ class ImageClient:
 			while len(recvData) != imageLength:	recvData += imageClientSock.recv(imageLength-len(recvData)) #Receive the rest
 		
 			self.imageQueue.append((sliceNr, cv2.imdecode(numpy.fromstring(recvData, numpy.uint8), cv2.CV_LOAD_IMAGE_COLOR)))
-			
-			i = 0
-			if i%20 == 0:
-				cv2.imwrite(imageQueue[-1], "slice.png")
-				i+=1
 	
 	def getFrame(self, includeFramecounter=False):
 		if includeFramecounter: return self.imageQueue.pop(0) #Return the tuple including the framecount
