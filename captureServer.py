@@ -69,7 +69,7 @@ def calibrate_wrapper():
 					time.sleep(1)
 				yield "Picture taken\n"
 
-				channelB, channelG, channelR = cv2.split(cam.getFrame())
+				channelB, channelG, channelR = cv2.split(cam.getFrame(turn=True))
 				mask = cv2.absdiff(baseImgChannelB, channelR)
 
 				ret, mask = cv2.threshold(mask, laserTreshold, 255, cv2.THRESH_BINARY)
