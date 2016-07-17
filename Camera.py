@@ -21,8 +21,7 @@ class Camera:
 		
 		#Rotate the image if needed. TODO: Client side implementation for performance reasons
 		if turn:
-			M = cv2.getRotationMatrix2D((640, 360), 180, 1.0)
-			rotated = cv2.warpAffine(frame[1], M, (1280, 720))
+			rotated = cv2.warpAffine(frame[1], self.rotationMatrix, (1280, 720))
 			frame = (frame[0], rotated)
 			
 		if includeFramecounter: return frame #Return the tuple including the framecount
@@ -41,6 +40,7 @@ class Camera:
 		self.cam = cv2.VideoCapture(int(CAMID))
 		self.cam.set(3, WIDTH)
 		self.cam.set(4, HEIGHT)
+		self.rotationMatrix = cv2.getRotationMatrix2D((WIDTH/2, HEIGHT/2), 180, 1.0)
 		self.capture = True
 		self.frameBuffer = []
 		self.captureThread = threading.Thread(target=self.captureThread, args=[BUFFERSIZE, PRINT_SKIPPED])

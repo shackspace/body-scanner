@@ -23,6 +23,7 @@ class ImageClient:
 			while len(recvData) != imageLength:	recvData += imageClientSock.recv(imageLength-len(recvData)) #Receive the rest
 		
 			self.imageQueue.append((sliceNr, cv2.imdecode(numpy.fromstring(recvData, numpy.uint8), cv2.CV_LOAD_IMAGE_COLOR)))
+			print(str(1/(time.time()-st)) +  "fps")
 	
 	def getFrame(self, includeFramecounter=False):
 		if includeFramecounter: return self.imageQueue.pop(0) #Return the tuple including the framecount
