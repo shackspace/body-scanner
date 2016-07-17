@@ -4,19 +4,18 @@ class Camera:
 	def captureThread(self, BUFFERSIZE, PRINT_SKIPPED):
 		framecounter = 0
 		st = time.time()
+		s, img = self.cam.read()	#FIXME ins while!
 		while self.capture:
-			s, img = self.cam.read()
 			if s:
 				if len(self.frameBuffer) == BUFFERSIZE: 
 					self.frameBuffer.pop(0)
-					if PRINT_SKIPPED: 
-						print("Camera buffer overflow")
+					if PRINT_SKIPPED: print("Camera buffer overflow")
 					
 				self.frameBuffer.append((framecounter, img))
 				framecounter += 1
 				
 				if framecounter%10 == 0:
-					print(str(1/(time.time()-st))+ "fps")
+					print(str((1/(time.time()-st))*10)+ "fps")
 					st = time.time()
 	
 	def getFrame(self, includeFramecounter=False, turn=False):
