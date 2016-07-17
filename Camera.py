@@ -4,8 +4,9 @@ class Camera:
 	def captureThread(self, BUFFERSIZE, PRINT_SKIPPED):
 		framecounter = 0
 		st = time.time()
-		s, img = self.cam.read()	#FIXME ins while!
 		while self.capture:
+			s, img = self.cam.read()
+			'''
 			if s:
 				if len(self.frameBuffer) == BUFFERSIZE: 
 					self.frameBuffer.pop(0)
@@ -17,6 +18,7 @@ class Camera:
 				if framecounter%10 == 0:
 					print(str((1/(time.time()-st))*10)+ "fps")
 					st = time.time()
+			'''
 	
 	def getFrame(self, includeFramecounter=False, turn=False):
 		#Gives back the first frame inside the buffer and removes it from the buffer
