@@ -3,6 +3,7 @@ import cv2, threading, time, glob
 class Camera:
 	def captureThread(self, BUFFERSIZE, PRINT_SKIPPED):
 		framecounter = 0
+		st = time.time()
 		while self.capture:
 			s, img = self.cam.read()
 			if s:
@@ -13,6 +14,10 @@ class Camera:
 					
 				self.frameBuffer.append((framecounter, img))
 				framecounter += 1
+				
+				if framecounter%10 == 0:
+					print(str(1/(time.time()-st))+ "fps")
+					st = time.time()
 	
 	def getFrame(self, includeFramecounter=False, turn=False):
 		#Gives back the first frame inside the buffer and removes it from the buffer
