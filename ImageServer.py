@@ -22,8 +22,8 @@ class ImageServer:
 	
 		while self.serve == True:			
 			while len(self.sendQueue) == 0: time.sleep(0.05) #Fetch an image from the send queue
-			print("Sending slice " + str(sliceNr))	
 			sliceNr, img = self.sendQueue.pop(0) #Get a compressed image from the queue
+			print("Sending slice " + str(sliceNr))	
 			connection.send(struct.pack(">I", len(img))) #Send the 4 byte length prefix
 			connection.send(struct.pack(">I", sliceNr)) #Send the 4 byte sliceNr
 			connection.sendall(img.tostring()) #Send the actual image

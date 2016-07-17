@@ -26,6 +26,7 @@ class ImageClient:
 			print(str(1/(time.time()-st)) +  "fps")
 	
 	def getFrame(self, includeFramecounter=False):
+		while len(self.imageQueue) == 0: time.sleep(0.02) #Wait for a new image to appear
 		if includeFramecounter: return self.imageQueue.pop(0) #Return the tuple including the framecount
 		else: return self.imageQueue.pop(0)[1] #Return the image only
 

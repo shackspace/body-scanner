@@ -27,8 +27,6 @@ def start_scan():
 
 @app.route("/api/live")
 def capture():
-	try: cam.release()
-	except: print("Camera was good, no need to release")
 	cam = Camera(1280, 720)
 	capture = cam.getFrame(turn=True)
 	cv2.imencode(".jpg", capture, [cv2.IMWRITE_JPEG_QUALITY, 95])
@@ -125,8 +123,6 @@ def calibrate_wrapper():
 		yield "Your coefficients are:\n"
 		yield str(transformationMatrix) + "\n"
 		dst = cv2.warpPerspective(baseImg, transformationMatrix , (720,720), flags=cv2.INTER_NEAREST)
-
-		cv2.imwrite("calibration_final.png", dst)
 	
 		yield "Writing transformation matrix...\n"
 		numpy.savetxt("calibration.txt", transformationMatrix)

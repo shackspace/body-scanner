@@ -46,11 +46,8 @@ def process(img, z):
 def processThread(transformationMatrix, laserTreshold, imageClient):
 	global objString
 	while imageClient.receiving or len(imageClient.imageQueue) != 0:
-		try: sliceNr, img = imageClient.getFrame(True)
-		except IndexError: 
-			time.sleep(0.01) #The list was empty, wait for image to appear
-			continue #Retry to grab a frame
-		
+		sliceNr, img = imageClient.getFrame(True)
+
 		print("Processing slice " + str(sliceNr))
 		img = preprocess(img, laserTreshold)
 		img = cv2.warpPerspective(img, transformationMatrix, (720,720), flags=cv2.INTER_LANCZOS4)
