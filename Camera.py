@@ -16,7 +16,9 @@ class Camera:
 	
 	def getFrame(self, includeFramecounter=False, turn=False):
 		#Gives back the first frame inside the buffer and removes it from the buffer
-		while len(self.frameBuffer) == 0: time.sleep(0.01) #Busywait for a new frame to appear
+		while len(self.frameBuffer) == 0: 
+			print("Camera buffer underflow")
+			time.sleep(0.01) #Busywait for a new frame to appear
 		frame = self.frameBuffer.pop(0)
 		
 		#Rotate the image if needed. TODO: Client side implementation for performance reasons
