@@ -6,6 +6,11 @@ class Camera:
 		st = time.time()
 		while self.capture:
 			s, img = self.cam.read()
+			framecounter += 1
+			
+			if framecounter%10 == 0:
+				print(str((1/(time.time()-st))*10)+ "fps")
+				st = time.time()
 			'''
 			if s:
 				if len(self.frameBuffer) == BUFFERSIZE: 
@@ -13,11 +18,7 @@ class Camera:
 					if PRINT_SKIPPED: print("Camera buffer overflow")
 					
 				self.frameBuffer.append((framecounter, img))
-				framecounter += 1
 				
-				if framecounter%10 == 0:
-					print(str((1/(time.time()-st))*10)+ "fps")
-					st = time.time()
 			'''
 	
 	def getFrame(self, includeFramecounter=False, turn=False):
