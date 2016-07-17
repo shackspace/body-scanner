@@ -14,6 +14,7 @@ class ImageClient:
 			imageLength = struct.unpack(">I", imageClientSock.recv(4))[0] #Get the 4 byte length prefix
 			if imageLength == 0: #If len is 0 the server has stopped sending
 				self.receiving = False
+				print("End signal received")
 				break
 				
 			sliceNr = struct.unpack(">I", imageClientSock.recv(4))[0] #Get the 4 byte sliceNr

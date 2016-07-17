@@ -12,6 +12,7 @@ objString = ""
 
 def preprocess(img, laserThreshold):
 	global cropImage #Use the preloaded crop image
+	
 	B, G, img = cv2.split(img) #Select the red channel only 
 	ret, img = cv2.threshold(img, laserThreshold, 255, cv2.THRESH_TOZERO) #Remove noise
 	
@@ -82,8 +83,6 @@ t1 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TR
 t2 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, imageClient))
 
 #Wait for the image computation to finish
-t1.daemon = True
-t2.daemon = True
 t1.start()
 t2.start()
 t1.join()

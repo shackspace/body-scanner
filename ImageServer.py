@@ -29,6 +29,7 @@ class ImageServer:
 			connection.sendall(img.tostring()) #Send the actual image
 
 		connection.send(struct.pack(">I", 0)) #Send the len prefix as 0 to indicate that sending has finished
+		print("End signal send to client")
 		self.cam.release()
 		time.sleep(5) #Give the client some grace time
 		connection.close()
