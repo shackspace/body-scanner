@@ -45,7 +45,7 @@ class Camera:
 	
 	def snap(self, raw=True):
 		jpg = ""
-		self.cam.capture(snap, "jpeg")
+		self.cam.capture(jpg, "jpeg")
 		if raw==True: return cv2.imdecode(numpy.fromstring(jpg, dtype=numpy.uint8), cv2.CV_LOAD_IMAGE_COLOR)
 		else: return jpg
 		
