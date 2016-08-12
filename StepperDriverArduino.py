@@ -38,7 +38,7 @@ class StepperDriver:
 		self.statusPin = 18 #Status Pin of the Arduino
 		
 		#Configure the Pins
-		GPIO.setup(self.enablePin, GPIO.IN)
+		GPIO.setup(self.enablePin, GPIO.OUT)
 		GPIO.setup(self.serialPin1, GPIO.OUT)
 		GPIO.setup(self.serialPin2, GPIO.OUT)
 		GPIO.setup(self.statusPin, GPIO.IN)
