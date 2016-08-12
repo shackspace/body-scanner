@@ -46,7 +46,7 @@ class Camera:
 	def snap(self):
 		jpg = BytesIO()
 		self.cam.capture(jpg, "jpeg")
-		return cv2.imdecode(numpy.fromstring(jpg, dtype=numpy.uint8), cv2.CV_LOAD_IMAGE_COLOR)
+		return cv2.imdecode(numpy.fromstring(jpg.getvalue(), dtype=numpy.uint8), cv2.CV_LOAD_IMAGE_COLOR)
 		
 	def __init__(self, WIDTH=1640, HEIGHT=1232, FRAMERATE=40, ISO=800, INITTIME=2):
 		#Link to camera modes: http://picamera.readthedocs.io/en/release-1.12/fov.html#camera-modes
