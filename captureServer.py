@@ -25,6 +25,7 @@ def start_scan():
 def capture():
 	cam = Camera(1640, 1232)
 	capture = cam.snap()
+	cam.close()
 	cv2.imwrite("capture.jpg", capture)
 	return send_from_directory(".", "capture.jpg")
 
@@ -119,6 +120,7 @@ def calibrate_wrapper():
 	
 		yield "Writing transformation matrix...\n"
 		numpy.savetxt("calibration.txt", transformationMatrix)
+		cam.close()
 		
 	return Response(calibrate())
 	
