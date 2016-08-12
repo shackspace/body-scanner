@@ -24,7 +24,7 @@ def start_scan():
 @app.route("/api/live")
 def capture():
 	cam = Camera(1640, 1232)
-	capture = cam.snap(raw=False)
+	capture = cam.snap()
 	cv2.imwrite("capture.jpg", capture)
 	return send_from_directory(".", "capture.jpg")
 
