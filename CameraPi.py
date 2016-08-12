@@ -42,6 +42,9 @@ class Camera:
 	def release(self):
 		print("Releasing camera")
 		self.capture = False
+
+	def close(self):
+		self.cam.close()
 	
 	def snap(self):
 		jpg = BytesIO()
