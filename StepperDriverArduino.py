@@ -27,7 +27,7 @@ class StepperDriver:
 		GPIO.output(self.enablePin, GPIO.HIGH)
 		time.sleep(0.05) #Wait for the Arduino to read
 		GPIO.output(self.enablePin, GPIO.LOW)
-		while gpio.input(self.statusPin) == 0: time.sleep(0.1) #Wait for the driver to finish
+		while GPIO.input(self.statusPin) == 0: time.sleep(0.1) #Wait for the driver to finish
 		
 	def __init__(self):
 		GPIO.setmode(GPIO.BOARD)
