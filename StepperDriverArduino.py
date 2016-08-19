@@ -32,10 +32,10 @@ class StepperDriver:
 	def __init__(self):
 		GPIO.setmode(GPIO.BOARD)
 		
-		self.enablePin = 11 #Pin to enable data transfer to the Arduino
-		self.serialPin1 = 13 #Serial1 of the Arduino
-		self.serialPin2 = 15 #Serial2 of the Arduino
-		self.statusPin = 18 #Status Pin of the Arduino
+		self.enablePin = 6 #Pin to enable data transfer to the Arduino
+		self.serialPin1 = 19 #Serial1 of the Arduino
+		self.serialPin2 = 13 #Serial2 of the Arduino
+		self.statusPin = 26 #Status Pin of the Arduino
 		
 		#Configure the Pins
 		GPIO.setup(self.enablePin, GPIO.OUT)

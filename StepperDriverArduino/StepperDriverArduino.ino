@@ -3,13 +3,13 @@ const int sleepPin = 2;
 const int stepPin = 3;
 const int dirPin = 4;
  
-const int sensorPin = 5; //Pins for the sensor if the bottom was reached
-const int statusPin = 6; //Are we currently ready or working?
+const int sensorPin = 9; //Pins for the sensor if the bottom was reached
+const int statusPin = 8; //Are we currently ready or working?
 
 //Pins for communication with the OrangePi
 const int enablePin = 7;
-const int serialPin1 = 8;
-const int serialPin2 = 9;
+const int serialPin1 = 6;
+const int serialPin2 = 5;
 
 const long height = 8450;
 const int ramp[] = {50, 45, 30, 25, 20, 17, 14, 11, 8, 7, 6, 6, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
