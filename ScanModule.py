@@ -64,13 +64,16 @@ class Scanner:
 		
 		print("Starting computation threads...")
 		t1 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
-		#t2 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
-
+		t2 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
+		t3 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
+		
 		#Wait for the image computation to finish
 		t1.start()
-		#t2.start()
+		t2.start()
+		t3.start()
 		t1.join()
-		#t2.join()
+		t2.join()
+		t3.join()
 
 		#Write the .obj file
 		print("Writing to .obj file test.obj")

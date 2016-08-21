@@ -20,7 +20,6 @@ class Camera:
 				print("Framebuffer returned 0-length input")
 				raise EOFError #Signal that the stream has ended
 	
-			print("Slicing image " + str(self.framecounter))
 			a = self.bytes.find("\xff\xd8")
 			b = self.bytes.find("\xff\xd9")
 	
