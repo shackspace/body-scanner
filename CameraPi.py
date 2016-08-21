@@ -3,7 +3,7 @@ from picamera import PiCamera
 from io import BytesIO, BlockingIOError
 
 class Camera:
-	def captureThread(self, BUFFERSIZE, PRINT_SKIPPED):
+	def captureThread(self):
 		self.cam.start_recording(self.framebuffer, format="mjpeg", quality=95)
 		while self.capture: self.cam.wait_recording(1) #Wait for the external interrupt
 		self.cam.stop_recording()		
