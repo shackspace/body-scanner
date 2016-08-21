@@ -7,8 +7,6 @@ class Camera:
 		self.cam.start_recording(self.framebuffer, format="mjpeg", quality=95)
 		while self.capture: self.cam.wait_recording(1) #Wait for the external interrupt
 		self.cam.stop_recording()
-		time.sleep(5)
-		print("Waiting 5 seconds for the camera to stop doing things")
 		self.framebuffer.seek(0) #Reqind the buffer for reading
 		print("Frambuffer rewinding...")
 	
