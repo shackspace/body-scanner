@@ -8,6 +8,7 @@ class Camera:
 		while self.capture: self.cam.wait_recording(1) #Wait for the external interrupt
 		self.cam.stop_recording()
 		self.framebuffer.seek(0) #Reqind the buffer for reading
+		print("Buffer position is at "+ str(self.framebuffer.tell()))		
 	
 	def getFrame(self, includeFramecounter=False, raw=True):
 		#Read a frame from the buffer and return it
