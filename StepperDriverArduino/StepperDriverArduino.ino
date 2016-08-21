@@ -54,7 +54,7 @@ void doRamp(){
         Serial.print("do ramp");
 	//Uses the predefined ramp to avoid float mathematics
 	for(int i=0; i<50; i++){
-                Serial.println(ramp[i]);
+                Serial.print("a");
 		digitalWrite(stepPin,HIGH);
 		delay(ramp[i]);
 		digitalWrite(stepPin,LOW);
@@ -88,8 +88,14 @@ void goBottom(){
 	doRamp();
 	
 	for(long i=0; i<(height+200); i++) {
-		if(!(digitalRead(sensorPin))){debounce++;}
-		else{debounce=0;}
+		if(digitalRead(sensorPin)){
+			debounce++;
+			Serial.print("1");
+		}
+		else{
+			Serial.print("0");
+			debounce=0;
+		}
 		
 		if (debounce > 5){
 			debounce = 0;

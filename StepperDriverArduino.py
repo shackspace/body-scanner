@@ -23,6 +23,12 @@ class StepperDriver:
 		GPIO.output(self.serialPin2, GPIO.HIGH)
 		self.fireCommand()
 
+	def laserEnable(self):
+		GPIO.output(self.laserPin, GPIO.LOW)
+			
+	def laserDisable(self):
+		GPIO.output(self.laserPin, GPIO.HIGH)
+
 	def fireCommand(self):
 		GPIO.output(self.enablePin, GPIO.HIGH)
 		time.sleep(0.05) #Wait for the Arduino to read
@@ -36,14 +42,17 @@ class StepperDriver:
 		self.serialPin1 = 35 #Serial1 of the Arduino
 		self.serialPin2 = 33 #Serial2 of the Arduino
 		self.statusPin = 37 #Status Pin of the Arduino
+		self.laserPin = 29 #Enable Pin of the laser
 		
 		#Configure the Pins
 		GPIO.setup(self.enablePin, GPIO.OUT)
 		GPIO.setup(self.serialPin1, GPIO.OUT)
 		GPIO.setup(self.serialPin2, GPIO.OUT)
 		GPIO.setup(self.statusPin, GPIO.IN)
+		GPIO.setup(self.laserPin, GPIO.OUT)
 		
 		#Set all to zero
 		GPIO.output(self.enablePin, GPIO.LOW)
 		GPIO.output(self.serialPin1, GPIO.LOW)
 		GPIO.output(self.serialPin2, GPIO.LOW)
+		GPIO.output(self.laserPin, GPIO.LOW)

@@ -40,6 +40,7 @@ def calibrate_wrapper():
 		yield "Resetting axis...\n"
 		s.goUp()
 		s.goBottom()
+		s.laserDisable()
 		
 		#Gather the setup vectors
 		yield "Shooting initial difference picture \n"
@@ -121,6 +122,7 @@ def calibrate_wrapper():
 		yield "Writing transformation matrix...\n"
 		numpy.savetxt("calibration.txt", transformationMatrix)
 		cam.close()
+		s.laserEnable()
 		
 	return Response(calibrate())
 	
