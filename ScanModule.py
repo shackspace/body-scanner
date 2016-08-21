@@ -7,13 +7,12 @@ from CameraPi import Camera
 objString = ""
 class Scanner:
 	def preprocess(self, img, LASER_TRESHHOLD):
-		global cropImage #Use the preloaded crop image
 	
 		B, G, img = cv2.split(img) #Select the red channel only 
 		ret, img = cv2.threshold(img, LASER_TRESHHOLD, 255, cv2.THRESH_TOZERO) #Remove noise
 	
 		#Mask out everything thats not in the capture range
-		img = cv2.bitwise_and(img, img, mask=cropImage)
+		img = cv2.bitwise_and(img, img, mask=self.cropImage)
 
 		return img
 
