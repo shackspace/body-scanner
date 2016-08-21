@@ -58,8 +58,8 @@ class Scanner:
 		STEPPER.goTop()
 		
 		print("Starting computation threads...")
-		t1 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, self.cam, self.CAPTURE_HEIGHT))
-		t2 = threading.Thread(target=processThread, args=(transformationMatrix, LASER_TRESHHOLD, self.cam, self.CAPTURE_HEIGHT))
+		t1 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
+		t2 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
 
 		#Wait for the image computation to finish
 		t1.start()
