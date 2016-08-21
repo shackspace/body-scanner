@@ -45,9 +45,9 @@ class Scanner:
 				return #All images from the queue were processed
 
 			print("Processing slice " + str(sliceNr))
-			img = preprocess(img, LASER_TRESHHOLD)
+			img = self.preprocess(img, LASER_TRESHHOLD)
 			img = cv2.warpPerspective(img, transformationMatrix, (CAPTURE_HEIGHT, CAPTURE_HEIGHT), flags=cv2.INTER_LANCZOS4) #Make sure we loose as low resolution as possible
-			objString += process(img, sliceNr, CAPTURE_HEIGHT)
+			objString += self.process(img, sliceNr, CAPTURE_HEIGHT)
 
 	def __init__(self, CAPTURE_WIDTH, CAPTURE_HEIGHT, STEPPER):
 		self.LASER_TRESHHOLD = 12

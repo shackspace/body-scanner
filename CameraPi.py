@@ -13,7 +13,6 @@ class Camera:
 	def getFrame(self, includeFramecounter=False, raw=True):
 		#Read a frame from the buffer and return it
 		while True:
-			print("GEtting frame from buffer at position is at "+ str(self.framebuffer.tell()))
 			newbytes = self.framebuffer.read(1024)
 			if len(newbytes) != 0: self.bytes += newbytes
 			else:
