@@ -17,6 +17,7 @@ class Camera:
 				self.readable = False 
 				raise EOFError #Signal that the stream has ended
 	
+			print("Slicing image " + str(self.framecounter))
 			a = self.bytes.find("\xff\xd8")
 			b = self.bytes.find("\xff\xd9")
 	
@@ -61,6 +62,7 @@ class Camera:
 		self.cam.iso = ISO
 		self.cam.awb_mode = "off"
 		self.cam.awb_gains = (3, 1) #(RED, BLUE), we need more red than blue
+		self.readable = False
 
 		print("Camera warming up")
 		time.sleep(INITTIME)
