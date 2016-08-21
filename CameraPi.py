@@ -6,7 +6,8 @@ class Camera:
 	def captureThread(self):
 		self.cam.start_recording(self.framebuffer, format="mjpeg", quality=95)
 		while self.capture: self.cam.wait_recording(1) #Wait for the external interrupt
-		self.cam.stop_recording()	
+		self.cam.stop_recording()
+		self.framebuffer.seek(0) #Reqind the buffer for reading
 	
 	def getFrame(self, includeFramecounter=False, raw=True):
 		#Read a frame from the buffer and return it
@@ -15,6 +16,7 @@ class Camera:
 			if len(newbytes) != 0: self.bytes += newbytes
 			else:
 				self.readable = False 
+				print("Framebuffer returned 0-length input")
 				raise EOFError #Signal that the stream has ended
 	
 			print("Slicing image " + str(self.framecounter))
