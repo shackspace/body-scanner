@@ -6,7 +6,7 @@ from CameraPi import Camera
 
 objString = ""
 class Scanner:
-	def preprocess(img, LASER_TRESHHOLD):
+	def preprocess(self, img, LASER_TRESHHOLD):
 		global cropImage #Use the preloaded crop image
 	
 		B, G, img = cv2.split(img) #Select the red channel only 
@@ -17,7 +17,7 @@ class Scanner:
 
 		return img
 
-	def process(img, z, CAPTURE_HEIGHT):
+	def process(self, img, z, CAPTURE_HEIGHT):
 		#And write this information to te obj file as well
 		objString = ""
 		for diagonalNr in range(-(CAPTURE_HEIGHT-1), CAPTURE_HEIGHT):
@@ -35,7 +35,7 @@ class Scanner:
 			objString += "v " + str(posX) + " " + str(z*2) + " " + str(posY) + "\n"
 		return objString
 
-	def processThread(transformationMatrix, LASER_TRESHHOLD, CAPTURE_HEIGHT):
+	def processThread(self, transformationMatrix, LASER_TRESHHOLD, CAPTURE_HEIGHT):
 		global objString
 		while self.cam.readable:
 			try: sliceNr, img = self.cam.getFrame(includeFramecounter=True)
@@ -46,7 +46,7 @@ class Scanner:
 			img = cv2.warpPerspective(img, transformationMatrix, (CAPTURE_HEIGHT, CAPTURE_HEIGHT), flags=cv2.INTER_LANCZOS4) #Make sure we loose as low resolution as possible
 			objString += process(img, sliceNr, CAPTURE_HEIGHT)
 
-	def __init__(CAPTURE_WIDTH, CAPTURE_HEIGHT, STEPPER):
+	def __init__(self, CAPTURE_WIDTH, CAPTURE_HEIGHT, STEPPER):
 		self.LASER_TRESHHOLD = 12
 		self.CAPTURE_WIDTH = 1640
 		self.CAPTURE_HEIGHT = 1232
