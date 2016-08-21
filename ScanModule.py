@@ -59,6 +59,7 @@ class Scanner:
 		self.cam = Camera(CAPTURE_WIDTH, CAPTURE_HEIGHT)
 		self.cam.startCapture()
 		STEPPER.goTop()
+		self.cam.release()
 		
 		print("Starting computation threads...")
 		t1 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))

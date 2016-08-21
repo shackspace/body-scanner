@@ -6,7 +6,7 @@ class Camera:
 	def captureThread(self):
 		self.cam.start_recording(self.framebuffer, format="mjpeg", quality=95)
 		while self.capture: self.cam.wait_recording(1) #Wait for the external interrupt
-		self.cam.stop_recording()		
+		self.cam.stop_recording()	
 	
 	def getFrame(self, includeFramecounter=False, raw=True):
 		#Read a frame from the buffer and return it
