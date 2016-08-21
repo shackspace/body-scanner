@@ -40,7 +40,6 @@ def calibrate_wrapper():
 		yield "Resetting axis...\n"
 		s.goUp()
 		s.goBottom()
-		s.laserDisable()
 		
 		#Gather the setup vectors
 		yield "Shooting initial difference picture \n"
@@ -63,7 +62,7 @@ def calibrate_wrapper():
 				yield "Picture taken\n"
 
 				channelB, channelG, channelR = cv2.split(cam.snap())
-				mask = cv2.absdiff(baseImgChannelB, channelR)
+				mask = cv2.absdiff(baseImgChannelR, channelR)
 
 				ret, mask = cv2.threshold(mask, laserTreshold, 255, cv2.THRESH_BINARY)
 				mask = cv2.dilate(mask, None, iterations=2) 
@@ -122,7 +121,6 @@ def calibrate_wrapper():
 		yield "Writing transformation matrix...\n"
 		numpy.savetxt("calibration.txt", transformationMatrix)
 		cam.close()
-		s.laserEnable()
 		
 	return Response(calibrate())
 	
