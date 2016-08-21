@@ -37,9 +37,12 @@ class Scanner:
 
 	def processThread(self, transformationMatrix, LASER_TRESHHOLD, CAPTURE_HEIGHT):
 		global objString
+		print("Process Thread running")
 		while self.cam.readable:
 			try: sliceNr, img = self.cam.getFrame(includeFramecounter=True)
-			except EOFError: return #All images from the queue were processed
+			except EOFError: 
+				print("Exiting because camera not readable")
+				return #All images from the queue were processed
 
 			print("Processing slice " + str(sliceNr))
 			img = preprocess(img, LASER_TRESHHOLD)
