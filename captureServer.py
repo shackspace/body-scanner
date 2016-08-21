@@ -13,9 +13,9 @@ app = Flask(__name__)
 def start_scan():
 	def scan():
 		global s
-		yield "Resetting stepper"
+		yield "Resetting stepper\n"
 		s.goBottom()
-		yield "Starting scan"
+		yield "Starting scan\n"
 		scanner = Scanner(1640, 1232, s)
 		return
 		
