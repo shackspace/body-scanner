@@ -49,7 +49,7 @@ class Scanner:
 			objString += self.process(img, sliceNr, CAPTURE_HEIGHT)
 
 	def __init__(self, CAPTURE_WIDTH, CAPTURE_HEIGHT, STEPPER):
-		self.LASER_TRESHHOLD = 60
+		self.LASER_TRESHHOLD = 50
 		self.CAPTURE_WIDTH = 1640
 		self.CAPTURE_HEIGHT = 1232
 		
@@ -66,14 +66,17 @@ class Scanner:
 		t1 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
 		t2 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
 		t3 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
+		t4 = threading.Thread(target=self.processThread, args=(self.transformationMatrix, self.LASER_TRESHHOLD, self.CAPTURE_HEIGHT))
 		
 		#Wait for the image computation to finish
 		t1.start()
 		t2.start()
 		t3.start()
+		t4.start()
 		t1.join()
 		t2.join()
 		t3.join()
+		t4.join()
 
 		#Write the .obj file
 		print("Writing to .obj file test.obj")
