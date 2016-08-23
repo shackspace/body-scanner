@@ -49,7 +49,7 @@ class Scanner:
 			objString += self.process(img, sliceNr, CAPTURE_HEIGHT)
 
 	def __init__(self, CAPTURE_WIDTH, CAPTURE_HEIGHT, STEPPER):
-		self.LASER_TRESHHOLD = 50
+		self.LASER_TRESHHOLD = 60
 		self.CAPTURE_WIDTH = 1640
 		self.CAPTURE_HEIGHT = 1232
 		
